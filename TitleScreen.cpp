@@ -1,5 +1,6 @@
 //Include SFML Libraries
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <sstream>
 
 using namespace sf;
@@ -67,6 +68,12 @@ void credits(RenderWindow& window){
 	fontSource.setCharacterSize(75);
 	fontSource.setPosition(window.getSize().x / 5.0f, window.getSize().y + 700);
 
+	//Selection sound
+	SoundBuffer selectBuffer;
+	selectBuffer.loadFromFile("Sounds/button-21.wav");
+	Sound selection;
+	selection.setBuffer(selectBuffer);
+
 	//Set scrolling variable
 	bool scrolling = true;
 	while(scrolling){
@@ -79,10 +86,12 @@ void credits(RenderWindow& window){
 				case Event::KeyPressed:
 					if(event.key.code == Keyboard::Return){
 						scrolling = false;
+						selection.play();
 						break;
 					}
 					if(event.key.code == Keyboard::Escape){
 						scrolling = false;
+						selection.play();
 						break;
 					}
 					break;
@@ -233,7 +242,23 @@ int main(){
  		textRect.top +
  		textRect.height / 2.0f);
 	//Here I use 1.4 instead of 1.5 for half so it visually looks in the middle of the logo
-	quitText.setPosition(logoText.getPosition().x * 1.4f, window.getSize().y * .95f);	 	
+	quitText.setPosition(logoText.getPosition().x * 1.4f, window.getSize().y * .95f);
+
+	//Preparing the sound
+
+	//Selection sound
+	SoundBuffer selectBuffer;
+	selectBuffer.loadFromFile("Sounds/button-21.wav");
+	Sound selection;
+	selection.setBuffer(selectBuffer);
+
+	//Background sound
+	SoundBuffer backgroundBuffer;
+	backgroundBuffer.loadFromFile("Sounds/rain.ogg");
+	Sound backgroundSound;
+	backgroundSound.setBuffer(backgroundBuffer);
+	backgroundSound.setLoop(true); //Replay background sound if loop ends
+	backgroundSound.play(); //Play sound 
 	
 	//Game Loop
 	while(window.isOpen()){
@@ -247,19 +272,23 @@ int main(){
 					if(event.key.code == Keyboard::Down){
 						if(selected < 3){
 							selected++;
+							selection.play();
 						}
 					}
 					if(event.key.code == Keyboard::Up){
 						if(selected > 0){
 							selected--;
+							selection.play();
 						}
 					}
 					if(event.key.code == Keyboard::Return){
 						if(selected == 1){
 							credits(window);
+							selection.play();
 						}
 					}
 					if(event.key.code == Keyboard::Escape){
+						selection.play();
 						window.close();
 					}		
 					break;
@@ -271,6 +300,7 @@ int main(){
 		if(Keyboard::isKeyPressed(Keyboard::Return)){
 			//Quit			
 			if(selected == 3){
+				selection.play();
 				window.close();
 			}
 		}		
