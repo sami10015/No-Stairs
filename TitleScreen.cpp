@@ -156,18 +156,11 @@ int main(){
 	//Texture to hold background of title screen
 	Texture textureBackground;
 	textureBackground.loadFromFile("Graphics/background.jpg");
-	
-	Texture textureIconic;
-	textureIconic.loadFromFile("Sprites/iconicSprite.png");
 
 	//Sprites to hold textures
 	Sprite spriteBackground;
 	spriteBackground.setTexture(textureBackground);
 	spriteBackground.setPosition(0,0); //Cover screen for background
-
-	Sprite spriteIconic;
-	spriteIconic.setTexture(textureIconic);
-	spriteIconic.setPosition(0,0);
 	
 	//Texts to output on the screen
 	Text logoText;
@@ -338,7 +331,6 @@ int main(){
 
 		window.draw(spriteBackground);
 		window.draw(logoText);
-		window.draw(spriteIconic);
 		window.draw(startText);
 		window.draw(creditsText);
 		window.draw(optionText);
