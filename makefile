@@ -5,11 +5,11 @@ DEBUGFLAGS = -g -Wall
 
 all: Main
 
-TitleScreen: Main.o TitleScreen.o
+TitleScreen: *.o 
 	$(CXX) $< -o $@ $(CXXLIBS)
 
-code/%.o: %.cpp
+%.o: %.cpp
 	$(CXX) $< -c -o $@
 
 clean:
-	rm TitleScreen code/*.o
+	rm *.o

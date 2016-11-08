@@ -10,6 +10,7 @@ TitleScreen::TitleScreen(){
 	textureBackground.loadFromFile("Graphics/background.jpg");
 
 	spriteBackground.setTexture(textureBackground);
+	
 	spriteBackground.setPosition(0,0); //Cover screen for background
 	
 	logoFont.loadFromFile("Fonts/SEASRN__.ttf");
@@ -40,7 +41,12 @@ TitleScreen::TitleScreen(){
 	quitText.setCharacterSize(150);
 }
 
-void TitleScreen::display(RenderWindow& window){
+int TitleScreen::display(RenderWindow& window){
+	//Fit image onto screen
+	spriteBackground.setScale(
+		window.getSize().x / spriteBackground.getLocalBounds().width,
+		window.getSize().y / spriteBackground.getLocalBounds().height);
+
 	//Sets text in the middle of the screen
 	FloatRect textRect = logoText.getLocalBounds();
 	logoText.setOrigin(textRect.left +
@@ -112,13 +118,18 @@ void TitleScreen::display(RenderWindow& window){
 						if(selected == 1){
 							credits(window);
 							selection.play();
+							return 0;
 						}else if(selected == 0){
-							playSelected = true;
+							selection.play();
+							playSelected = true; //Break out of title screen
 						}
 					}
 					if(event.key.code == Keyboard::Escape){
 						selection.play();
+						backgroundSound.setLoop(false);
+						backgroundSound.stop();
 						window.close();
+						return 0;
 					}		
 					break;
 				default:
@@ -131,6 +142,7 @@ void TitleScreen::display(RenderWindow& window){
 			if(selected == 3){
 				selection.play();
 				window.close();
+				return 0;
 			}
 		}		
 
@@ -167,6 +179,7 @@ void TitleScreen::display(RenderWindow& window){
 		
 		//Break out of class and start the game
 		if(playSelected){
+			return 1;
 			break;
 		}
 

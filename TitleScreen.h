@@ -45,6 +45,6 @@ class TitleScreen{
 		Sound backgroundSound;
 	public:
 		TitleScreen(); //Constructor
-		void display(RenderWindow& window); //Display the title screen
+		int display(RenderWindow& window); //Display the title screen
 		void credits(RenderWindow& window); //Display the credits screen
 };
