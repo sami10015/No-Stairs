@@ -1,11 +1,11 @@
 CXX = g++
 CXXFLAGS = -std=c++11 - pedantic
-CXXLIBS = -lsmfl-graphics -lsfml-window -lsfml-system
+CXXLIBS = -lsmfl-graphics -lsfml-window -lsfml-system -lsfml-audio
 DEBUGFLAGS = -g -Wall
 
-all: Timber
+all: Main
 
-TitleScreen: code/TitleScreen.o
+TitleScreen: Main.o TitleScreen.o
 	$(CXX) $< -o $@ $(CXXLIBS)
 
 code/%.o: %.cpp

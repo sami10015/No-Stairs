@@ -3,10 +3,15 @@
 #include <SFML/Audio.hpp>
 #include <sstream>
 
+using namespace sf;
+
 class TitleScreen{
 	private:
 		//Indicates which option is selected in the menu
 		int selected = 0; 
+
+		//Text speed for credits display
+		const int textSpeed = 100;
 		
 		//Texture to hold background of title screen
 		Texture textureBackground; 
@@ -40,5 +45,6 @@ class TitleScreen{
 		Sound backgroundSound;
 	public:
 		TitleScreen(); //Constructor
-		display(RenderWindow& window); //Display the title screen
-}
+		void display(RenderWindow& window); //Display the title screen
+		void credits(RenderWindow& window); //Display the credits screen
+};
