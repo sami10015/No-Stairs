@@ -86,10 +86,6 @@ int TitleScreen::display(RenderWindow& window){
 	//Preparing the sound
 	selectBuffer.loadFromFile("Sounds/button-21.wav");
 	selection.setBuffer(selectBuffer);
-	backgroundBuffer.loadFromFile("Sounds/rain.ogg");
-	backgroundSound.setBuffer(backgroundBuffer);
-	backgroundSound.setLoop(true); //Replay background sound if loop ends
-	backgroundSound.play(); //Play sound
 
 	bool playSelected = false; 
 	
@@ -126,8 +122,6 @@ int TitleScreen::display(RenderWindow& window){
 					}
 					if(event.key.code == Keyboard::Escape){
 						selection.play();
-						backgroundSound.setLoop(false);
-						backgroundSound.stop();
 						window.close();
 						return 0;
 					}		

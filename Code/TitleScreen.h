@@ -41,8 +41,6 @@ class TitleScreen{
 		//Sounds and sound buffers
 		SoundBuffer selectBuffer;
 		Sound selection;
-		SoundBuffer backgroundBuffer;
-		Sound backgroundSound;
 	public:
 		TitleScreen(); //Constructor
 		int display(RenderWindow& window); //Display the title screen

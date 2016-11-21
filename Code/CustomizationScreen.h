@@ -42,5 +42,5 @@ class CustomizationScreen{
 		int display(RenderWindow& window); //Start customization
 		int finalize(RenderWindow& window); //Finalize customization
 		Sprite getCharSprite();
-		Texture getCharTexture();
+		Texture& getCharTexture();
 };

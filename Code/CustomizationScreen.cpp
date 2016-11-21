@@ -265,6 +265,6 @@ Sprite CustomizationScreen::getCharSprite(){
 	return charSprite;
 }
 
-Texture CustomizationScreen::getCharTexture(){
+Texture& CustomizationScreen::getCharTexture(){
 	return charTexture;
 }

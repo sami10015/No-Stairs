@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "AnimatedSprite.hpp"
+#include <iostream>
 
 using namespace sf;
 
@@ -17,19 +18,11 @@ class Player{
 
 		//Animation
 		Animation walkingAnimationLeft;
-		Animation walkingAnimationRight
+		Animation walkingAnimationRight;
+		Animation shootAnimationLeft;
+		Animation shootAnimationRight;
 		Animation* currentAnimation;
-		AnimatedSprite animatedSprite(sf::seconds(0.15), true, false);
-
-		//Screen resolution
-		Vector2f m_Resolution;
-
-		//Position
-		Vector2f m_Position;
-
-		//Directions player is moving in(Left and right for now due to side scrolling)
-		bool m_LeftPressed;
-		bool m_RightPressed;
+		AnimatedSprite animatedSprite;
 
 		//Health
 		int m_Health;
@@ -41,13 +34,13 @@ class Player{
 		//Constructor
 		Player(Texture& texture);
 
-		//The next four function move the player
+		//The next four function move the player animation
 		void moveLeft();
 		void moveRight();
 
-		//Stop the player moving in a specific direction
-		void stopLeft();
-		void stopRight();
+		//Shoot animation function
+		void shootLeft();
+		void shootRight();
 
 		//Call this function once every frame
 		void update(Time time);
@@ -61,9 +54,18 @@ class Player{
 		//Increase max health player can have
 		void increaseHealthLevel(int amount);
 
+		//Play the animated sprite
 		void play();
 
+		//Move the animated sprite
 		void move(Vector2f movement, float seconds);
 
-		void stop();	
+		//Stop moving the animated sprite
+		void stop();
+
+		//Return the animated sprite
+		AnimatedSprite& getAnimatedSprite();
+
+		//Get the speed of the character
+		float getSpeed();	
 };
