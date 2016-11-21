@@ -3,9 +3,9 @@ CXXFLAGS = -std=c++11 - pedantic
 CXXLIBS = -lsmfl-graphics -lsfml-window -lsfml-system -lsfml-audio
 DEBUGFLAGS = -g -Wall
 
-all: Main
+all: sfml-app
 
-TitleScreen: *.o 
+Main: Main.o Player.o TitleScreen.o CustomizationScreen.o 
 	$(CXX) $< -o $@ $(CXXLIBS)
 
 %.o: %.cpp
