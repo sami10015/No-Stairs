@@ -32,7 +32,7 @@ class Player{
 		float m_Speed;
 	public:
 		//Constructor
-		Player(Texture& texture);
+		Player(Texture& texture, RenderWindow& window);
 
 		//The next four function move the player animation
 		void moveLeft();
@@ -67,5 +67,9 @@ class Player{
 		AnimatedSprite& getAnimatedSprite();
 
 		//Get the speed of the character
-		float getSpeed();	
+		float getSpeed();
+
+		//Return Local and Global bounds of Animated Sprite
+		FloatRect getAnimatedSpriteLocalBounds();
+		FloatRect getAnimatedSpriteGlobalBounds();	
 };

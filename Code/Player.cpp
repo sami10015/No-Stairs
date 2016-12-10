@@ -2,14 +2,14 @@
 #include <SFML/Graphics.hpp>
 
 //Constructor
-Player::Player(Texture& texture){
+Player::Player(Texture& texture, RenderWindow& window){
 	//Set up Player Stats
 	m_Speed = START_SPEED;
 	m_Health = START_HEALTH;
 	m_MaxHealth = START_HEALTH;
 
 	//Construct AnimatedSprite object
-	animatedSprite = AnimatedSprite(sf::seconds(0.15), true, false);
+	animatedSprite = AnimatedSprite(sf::seconds(0.1), true, false);
 
 	//Set up Left Walking Animation
 	walkingAnimationLeft.setSpriteSheet(texture);
@@ -71,7 +71,7 @@ Player::Player(Texture& texture){
 	currentAnimation = &walkingAnimationLeft;
 
     	//Set up AnimatedSprite
-    	animatedSprite.setPosition(sf::Vector2f(100,838));
+    	animatedSprite.setPosition(sf::Vector2f(window.getSize().x * .1,window.getSize().y * .823));
 }
 
 //Move the animation left
@@ -151,4 +151,14 @@ void Player::shootLeft(){
 //Animation for shooting right
 void Player::shootRight(){
 	currentAnimation = &shootAnimationRight;
+}
+
+//Return Local Bounds
+FloatRect Player::getAnimatedSpriteLocalBounds(){
+	return animatedSprite.getLocalBounds();
+}
+
+//Return Global Bounds
+FloatRect Player::getAnimatedSpriteGlobalBounds(){
+	return animatedSprite.getGlobalBounds();
 }

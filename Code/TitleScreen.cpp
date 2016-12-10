@@ -39,6 +39,10 @@ TitleScreen::TitleScreen(){
 
 	quitText.setString("QUIT");
 	quitText.setCharacterSize(150);
+
+	//Sounds
+	selectBuffer.loadFromFile("Sounds/button-21.wav");
+	selection.setBuffer(selectBuffer);
 }
 
 int TitleScreen::display(RenderWindow& window){
@@ -60,32 +64,28 @@ int TitleScreen::display(RenderWindow& window){
  		textRect.top +
  		textRect.height / 2.0f);
 	//Here I use 1.4 instead of 1.5 for half so it visually looks in the middle of the logo
-	startText.setPosition(logoText.getPosition().x * 1.4f, window.getSize().y * .50f);
+	startText.setPosition(logoText.getPosition().x * 1.4f, window.getSize().y * .45f);
 
 	creditsText.setOrigin(textRect.left +
  		textRect.width / 2.0f,
  		textRect.top +
  		textRect.height / 2.0f);
 	//Here I use 1.4 instead of 1.5 for half so it visually looks in the middle of the logo
-	creditsText.setPosition(logoText.getPosition().x * 1.4f, window.getSize().y * .65f);
+	creditsText.setPosition(logoText.getPosition().x * 1.4f, window.getSize().y * .60f);
 
 	optionText.setOrigin(textRect.left +
  		textRect.width / 2.0f,
  		textRect.top +
  		textRect.height / 2.0f);
 	//Here I use 1.4 instead of 1.5 for half so it visually looks in the middle of the logo
-	optionText.setPosition(logoText.getPosition().x * 1.4f, window.getSize().y * .80f);
+	optionText.setPosition(logoText.getPosition().x * 1.4f, window.getSize().y * .75f);
 
 	quitText.setOrigin(textRect.left +
  		textRect.width / 2.0f,
  		textRect.top +
  		textRect.height / 2.0f);
 	//Here I use 1.4 instead of 1.5 for half so it visually looks in the middle of the logo
-	quitText.setPosition(logoText.getPosition().x * 1.4f, window.getSize().y * .95f);
-
-	//Preparing the sound
-	selectBuffer.loadFromFile("Sounds/button-21.wav");
-	selection.setBuffer(selectBuffer);
+	quitText.setPosition(logoText.getPosition().x * 1.4f, window.getSize().y * .90f);
 
 	bool playSelected = false; 
 	
@@ -111,10 +111,12 @@ int TitleScreen::display(RenderWindow& window){
 						}
 					}
 					if(event.key.code == Keyboard::Return){
-						if(selected == 1){
-							credits(window);
+						if(selected == 2){
 							selection.play();
-							return 0;
+							return 6;
+						}else if(selected == 1){
+							selection.play();
+							return 7;
 						}else if(selected == 0){
 							selection.play();
 							playSelected = true; //Break out of title screen
@@ -196,11 +198,6 @@ void TitleScreen::credits(RenderWindow& window){
 	//Clock to adjust positioning
 	Clock clock;
 
-	textureBackground.loadFromFile("Graphics/background.jpg");
-
-	spriteBackground.setTexture(textureBackground);
-	spriteBackground.setPosition(0,0);
-
 	regularFont.loadFromFile("Fonts/ostrich-regular.ttf");
 
 	//Set font to messages
@@ -235,10 +232,6 @@ void TitleScreen::credits(RenderWindow& window){
 	fontSource.setString("Font Source: Font Squirrel");
 	fontSource.setCharacterSize(75);
 	fontSource.setPosition(window.getSize().x / 5.0f, window.getSize().y + 700);
-
-	//Sounds
-	selectBuffer.loadFromFile("Sounds/button-21.wav");
-	selection.setBuffer(selectBuffer);
 
 	//Set scrolling variable
 	bool scrolling = true;
@@ -311,5 +304,93 @@ void TitleScreen::credits(RenderWindow& window){
 		window.display();
 	}
 	window.close();
+}
+
+int TitleScreen::options(RenderWindow& window){
+	//Clear initial window	
+	window.clear();
+
+	//Set Fonts to all Text
+	fullscreen.setFont(regularFont);
+	windowed.setFont(regularFont);
+
+	//Assign messages to text
+	fullscreen.setString("FullScreen Mode");
+	fullscreen.setCharacterSize(150);
+	windowed.setString("Windowed Mode");
+	windowed.setCharacterSize(150);
+	
+	//Use logo to place correctly
+	FloatRect textRect = logoText.getLocalBounds();
+
+	fullscreen.setOrigin(textRect.left +
+ 		textRect.width / 2.0f,
+ 		textRect.top +
+ 		textRect.height / 2.0f);
+	//Here I use 1.4 instead of 1.5 for half so it visually looks in the middle of the logo
+	fullscreen.setPosition(logoText.getPosition().x * 1.2f, window.getSize().y * .50f);
+	fullscreen.setFillColor(Color::Red);
+
+	windowed.setOrigin(textRect.left +
+ 		textRect.width / 2.0f,
+ 		textRect.top +
+ 		textRect.height / 2.0f);
+	//Here I use 1.4 instead of 1.5 for half so it visually looks in the middle of the logo
+	windowed.setPosition(logoText.getPosition().x * 1.2f, window.getSize().y * .65f);
+	windowed.setFillColor(Color::White);
+
+	int select = 0;
+
+	while(window.isOpen()){
+		//Process Event
+		Event event;
+		
+		//Must utilize event instead of isKeyPressed to handle single execution
+		while(window.pollEvent(event)){
+			switch(event.type){
+				case Event::KeyPressed:
+					if(event.key.code == Keyboard::Return){
+						if(select == 0){//Fullscreen mode
+							window.create(VideoMode::getFullscreenModes().front(), "No Stairs", Style::Fullscreen);
+							selection.play();
+						}else{//Windowed mode
+							window.create(VideoMode::getFullscreenModes().front(), "No Stairs");
+							selection.play();
+						}
+					}
+					//Return back to title screen
+					if(event.key.code == Keyboard::Escape){
+						selection.play();
+						return 2;
+					}
+					if(event.key.code == Keyboard::Up){
+						if(select > 0){
+							select--;
+						}						
+					}
+					if(event.key.code == Keyboard::Down){
+						if(select < 1){
+							select++;
+						}
+					}
+					break;
+				default:
+					break;
+			}
+		}
+		if(select == 0){
+			fullscreen.setFillColor(Color::Red);
+			windowed.setFillColor(Color::White);
+		}else{
+			fullscreen.setFillColor(Color::White);
+			windowed.setFillColor(Color::Red);
+		}
+		window.clear();
+		window.draw(spriteBackground);
+		window.draw(fullscreen);
+		window.draw(windowed);
+		window.display();
+	}
+
 }
 

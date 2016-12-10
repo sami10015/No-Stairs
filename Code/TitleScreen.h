@@ -34,6 +34,10 @@ class TitleScreen{
 		Text spriteSource;
 		Text fontSource;
 
+		//More text for options function
+		Text fullscreen;
+		Text windowed;
+
 		//Fonts for our text
 		Font logoFont;
 		Font regularFont;
@@ -45,4 +49,5 @@ class TitleScreen{
 		TitleScreen(); //Constructor
 		int display(RenderWindow& window); //Display the title screen
 		void credits(RenderWindow& window); //Display the credits screen
+		int options(RenderWindow& window); //Display the options screen
 };
