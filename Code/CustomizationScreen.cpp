@@ -48,7 +48,9 @@ CustomizationScreen::CustomizationScreen(){
 
 	navigate.setString("CHOOSE (LEFT/RIGHT)");
 	navigate.setCharacterSize(250);
-	navigate.setFillColor(Color::White);	
+	navigate.setFillColor(Color::White);
+		
+	charSprite.setScale(charSprite.getScale().x * 4, charSprite.getScale().y * 4);	
 }
 
 int CustomizationScreen::display(RenderWindow& window){
@@ -154,8 +156,7 @@ int CustomizationScreen::display(RenderWindow& window){
 
 int CustomizationScreen::finalize(RenderWindow& window){
 	//Girl sprites location directory
-	String girl1LoadDir = "Sprites/girl-1.png";
-	String girl2LoadDir = "Sprites/girl-2.png";
+	String girl1LoadDir = "Sprites/player2.png";
 
 	String boy1LoadDir = "Sprites/player.png";
 
@@ -170,7 +171,8 @@ int CustomizationScreen::finalize(RenderWindow& window){
 	//Sprites
 	charSprite.setTexture(charTexture);
 	charSprite.setTextureRect(IntRect(17, 141, 30, 49));
-	charSprite.setScale(charSprite.getScale().x * 4, charSprite.getScale().y * 4);
+	Vector2f currentScale = charSprite.getScale();
+	
 	charSprite.setPosition(window.getSize().x / 2.15f, window.getSize().y * .40f);
 	
 	window.clear();
@@ -203,12 +205,10 @@ int CustomizationScreen::finalize(RenderWindow& window){
 					if(event.key.code == Keyboard::Right){
 						//Female
 						if(genderSelection == 1){
-							if(charSelection < 1){
-								charSelection++;
-								charTexture.loadFromFile(girl2LoadDir);
-								charSprite.setTexture(charTexture);
-								selection.play();
-							}
+							charSelection++;
+							charTexture.loadFromFile(girl1LoadDir);
+							charSprite.setTextureRect(IntRect(18, 142, 28, 48));
+							selection.play();
 						}else{ //Male
 							charTexture.loadFromFile(boy1LoadDir);
 							charSprite.setTexture(charTexture);
@@ -219,12 +219,10 @@ int CustomizationScreen::finalize(RenderWindow& window){
 					if(event.key.code == Keyboard::Left){
 						//Female
 						if(genderSelection == 1){
-							if(charSelection > 0){
-								charSelection--;
-								charTexture.loadFromFile(girl1LoadDir);
-								charSprite.setTexture(charTexture);
-								selection.play();
-							}
+							charSelection--;
+							charTexture.loadFromFile(girl1LoadDir);
+							charSprite.setTexture(charTexture);
+							selection.play();
 						}else{ //Male
 							charTexture.loadFromFile(boy1LoadDir);
 							charSprite.setTexture(charTexture);

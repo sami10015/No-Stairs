@@ -108,7 +108,6 @@ int main(){
 
 	//Clock for timing everything
 	Clock frameClock;
-	Clock chestClock;
 
 	//Background sound
 	backgroundBuffer.loadFromFile("Sounds/wind.wav");
