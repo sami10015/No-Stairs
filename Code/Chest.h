@@ -34,4 +34,7 @@ class Chest{
 		//Return Local and Global bounds of Animated Sprite
 		FloatRect getAnimatedSpriteLocalBounds();
 		FloatRect getAnimatedSpriteGlobalBounds();
+
+		//Set position of chest
+		void setPosition(Vector2f vector);
 };

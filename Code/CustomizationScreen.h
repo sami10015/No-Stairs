@@ -41,6 +41,7 @@ class CustomizationScreen{
 		//Integer use to go back and forth between screens
 		int display(RenderWindow& window); //Start customization
 		int finalize(RenderWindow& window); //Finalize customization
-		Sprite getCharSprite();
-		Texture& getCharTexture();
+		Sprite getCharSprite(); //Get the Sprite
+		Texture& getCharTexture(); //Get the texture
+		int getGenderSelection(); //Get the gender
 };

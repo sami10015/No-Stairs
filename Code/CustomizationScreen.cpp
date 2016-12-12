@@ -235,8 +235,12 @@ int CustomizationScreen::finalize(RenderWindow& window){
 						return 4;
 					}
 					if(event.key.code == Keyboard::Return){
-						selection.play();						
-						return 5;
+						selection.play();
+						if(genderSelection == 1){
+							return 8;
+						}else{
+							return 5;
+						}					
 					}		
 					break;
 				default:
@@ -265,4 +269,8 @@ Sprite CustomizationScreen::getCharSprite(){
 
 Texture& CustomizationScreen::getCharTexture(){
 	return charTexture;
+}
+
+int CustomizationScreen::getGenderSelection(){
+	return genderSelection;
 }

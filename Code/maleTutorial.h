@@ -10,14 +10,18 @@ using namespace sf;
 
 class maleTutorial{
 	private:
+		//Textures
 		Texture firstLevelBackground;
 		Texture bowTexture;
 		
+		//Sprites
 		Sprite firstLevelBackgroundSprite;
 		Sprite bowSprite;	
 
+		//Clock
 		Clock frameClock;
 
+		//Sounds for level
 		SoundBuffer backgroundBuffer;
 		Sound backgroundSound;
 		
@@ -50,5 +54,6 @@ class maleTutorial{
 		bool pickUp = false;	
 	public:
 		maleTutorial(RenderWindow& window);
+		void display(RenderWindow& window, Player player, Chest chest); 
 };
 

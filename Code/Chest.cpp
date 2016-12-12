@@ -50,3 +50,7 @@ FloatRect Chest::getAnimatedSpriteLocalBounds(){
 FloatRect Chest::getAnimatedSpriteGlobalBounds(){
 	return animatedSprite.getGlobalBounds();
 }
+
+void Chest::setPosition(Vector2f vector){
+	animatedSprite.setPosition(vector);
+}

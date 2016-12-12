@@ -32,7 +32,7 @@ class Player{
 		float m_Speed;
 	public:
 		//Constructor
-		Player(Texture& texture, RenderWindow& window);
+		Player(Texture& texture, RenderWindow& window, int genderSelection);
 
 		//The next four function move the player animation
 		void moveLeft();
@@ -71,5 +71,8 @@ class Player{
 
 		//Return Local and Global bounds of Animated Sprite
 		FloatRect getAnimatedSpriteLocalBounds();
-		FloatRect getAnimatedSpriteGlobalBounds();	
+		FloatRect getAnimatedSpriteGlobalBounds();
+
+		//Set position
+		void setPosition(Vector2f vector);	
 };
