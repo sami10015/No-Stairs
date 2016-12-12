@@ -12,6 +12,6 @@ Wrote and built an event-driven game that utilizes the C++ language, and SFML li
 6. Implement an complete 2D game title with multiple levels and player customizations.
 
 ##Screenshots
-
+![Alt text](/Screenshots/screenshot.png?raw=true "Optional Title")
 
 </snippet>
