@@ -11,6 +11,13 @@ Game Design and Programming Objectives
 5. Employ appropriate coding structures and techniques to implement basic video game paradigms.
 6. Implement an complete 2D game title with multiple levels and player customizations.
 
+Tools
+-------------
+1. C++
+2. SFML - https://www.sfml-dev.org/
+3. Linux
+4. Make
+
 Screenshots
 -------------
 ![Alt text](/Screenshots/screenshot1.png?raw=true "Optional Title")
