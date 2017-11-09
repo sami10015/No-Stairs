@@ -1,8 +1,5 @@
-No-Stairs
+No-Stairs: Event-driven game that utilizes the C++ language, and SFML library.
 ===================
-
-Wrote and built an event-driven game that utilizes the C++ language, and SFML library.
-----------
 
 Game Design and Programming Objectives
 -------------
